@@ -10,6 +10,32 @@ h1 {
   font-size: 2em;
 }
 
+/*
+// changed from this to html, keeping in case
+div.accreditation {
+	position: absolute;
+	top: 660px;
+	right: 0px;
+	left: 0px;
+	width: 512px;
+	height: 50px;
+	border: 3px solid #73AD21;
+	color: black;
+	font-weight: 500;
+}
+*/
+
+div.accreditation {
+	width: 720px;
+	height: 80px;
+	overflow: auto;
+	margin-bottom: 10px;
+}
+
+div.sketch-holder {
+	margin-top: 10px;
+}
+
 body {
 /*  margin: 0;*/
 /*  display: flex;*/
