@@ -1,5 +1,5 @@
 let img;
-let diagram_button, sensor_button, unsure_button;
+let diagram_button, sensor_button, mixed_button;
 let x, y;
 let imageList =
 	['512.jpg', '171118.jpg', '55685.jpg', '41640.jpg', '161294.jpg', '119145.jpg', '94606.jpg', '12318.jpg', '81674.jpg', '135180.jpg', '166435.jpg', '88950.jpg', '116863.jpg', '113725.jpg', '100418.jpg', '10263.jpg', '107188.jpg', '6875.jpg', '159687.jpg', '121848.jpg', '81734.jpg', '39624.jpg', '153856.jpg', '154580.jpg', '133217.jpg', '149106.jpg', '5600.jpg', '161772.jpg', '125292.jpg', '145409.jpg', '9467.jpg', '169317.jpg', '16795.jpg', '19158.jpg', '34999.jpg', '162889.jpg', '158361.jpg', '19209.jpg', '31444.jpg', '159528.jpg', '41253.jpg', '19789.jpg', '138808.jpg', '22011.jpg', '41143.jpg', '133089.jpg', '108140.jpg', '134224.jpg', '11905.jpg', '16398.jpg', '7692.jpg', '90834.jpg', '19967.jpg', '121213.jpg', '124903.jpg', '18595.jpg', '63035.jpg', '60238.jpg', '17403.jpg', '161580.jpg', '127862.jpg', '18093.jpg', '27731.jpg', '133703.jpg', '150958.jpg', '88809.jpg', '33062.jpg', '22310.jpg', '135194.jpg', '64159.jpg', '64841.jpg', '19289.jpg', '164368.jpg', '156364.jpg', '5765.jpg', '161153.jpg', '170697.jpg', '62943.jpg', '27003.jpg', '147305.jpg', '57456.jpg', '43216.jpg', '80323.jpg', '100930.jpg', '108460.jpg', '111245.jpg', '44472.jpg', '172425.jpg', '124945.jpg', '102597.jpg', '139856.jpg', '153040.jpg', '6234.jpg', '45166.jpg', '49261.jpg', '129597.jpg', '36854.jpg', '77972.jpg', '38244.jpg', '56562.jpg']
@@ -26,7 +26,7 @@ let results = {};
 let namekeys = {
   0: "diagram",
   1: "sensor",
-  2: "unsure"
+  2: "mixed"
 };
 
 function setup() {
@@ -51,17 +51,17 @@ function setup() {
   sensor_button.mousePressed(assign_sensor);
   x += 200;
 
-  unsure_button = createButton('unsure');
-  unsure_button.position(x, y);
-  unsure_button.size(200, 50);
-  unsure_button.mousePressed(assign_unsure);
+  mixed_button = createButton('mixed');
+  mixed_button.position(x, y);
+  mixed_button.size(200, 50);
+  mixed_button.mousePressed(assign_mixed);
 
-  unsure_button = createButton('download results as csv');
-  unsure_button.id('download_link');
-  unsure_button.position(10, 800);
-  unsure_button.size(350, 50);
-  unsure_button.mousePressed(download_csv);
-    	
+  mixed_button = createButton('download results as csv');
+  mixed_button.id('download_link');
+  mixed_button.position(10, 800);
+  mixed_button.size(350, 50);
+  mixed_button.mousePressed(download_csv);
+
 	console.log(accreditations[0][0])
 	// initialise accreditation
 	document.getElementById("accreditation").innerHTML = "<p>".concat(accreditations[counter][0]).concat("</p>");
@@ -106,8 +106,8 @@ function assign_sensor() {
   next_image();
 }
 
-function assign_unsure() {
-  console.log("assign unsure");
+function assign_mixed() {
+  console.log("assign mixed");
   results[imageList[counter]] = 2;
   if(!bComplete) {
     total_u += 1;
@@ -139,21 +139,21 @@ function keyPressed() {
 function draw() {
   // white background, make sure not trying to draw anything else in same area
 	background(255);
-	
+
   let x = 512;
   let y = 512;
   let ratio = img.height / img.width;
   let xBigger = img.width > img.height ? true : false;
-  
+
 //  let verbose = true;
   let verbose = false;
-  
+
   if(verbose) {
     console.log("xBigger: ".concat(xBigger));
     console.log("img.width: ".concat(img.width));
     console.log("img.height: ".concat(img.height));
   }
-  
+
   // resize image based on which axis is bigger
   if(xBigger) {
     if(true) {
@@ -170,7 +170,7 @@ function draw() {
     console.log("x: ".concat(x));
     console.log("y: ".concat(y));
   }
-  
+
   image(img, 20, 80, x, y);
 
   if(true) {
@@ -188,7 +188,7 @@ function draw() {
   text("// totals", 256, 800);
   text("diagram: ".concat(total_d), 256, 820);
   text("sensor: ".concat(total_s), 256, 840);
-  text("unsure: ".concat(total_u), 256, 860);
+  text("mixed: ".concat(total_u), 256, 860);
 
   if(bComplete === true) {
     text("all images labelled", 100, 100);
